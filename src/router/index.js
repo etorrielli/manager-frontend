@@ -8,6 +8,7 @@ import Full from '@/containers/Full'
 import Dashboard from '@/views/Dashboard'
 import Personas from '@/views/persona/Personas'
 import AltaPersona from '@/views/persona/AltaPersona'
+import EditarPersona from '@/views/persona/EditarPersona'
 import Documentos from '@/views/documento/Documentos'
 
 Vue.use(Router)
@@ -27,28 +28,17 @@ export default new Router({
           path: 'personas',
           name: 'Personas',
           component: Personas
-        }
-      ]
-    },
-    {
-      path: '/',
-      redirect: '/personas',
-      name: 'Home',
-      component: Full,
-      children: [
+        },
         {
           path: 'alta-persona',
           name: 'AltaPersona',
           component: AltaPersona
-        }
-      ]
-    },
-    {
-      path: '/',
-      redirect: '/personas',
-      name: 'Home',
-      component: Full,
-      children: [
+        },
+        {
+          path: 'editar-persona/:id',
+          name: 'editar-persona',
+          component: EditarPersona
+        },
         {
           path: 'documentos',
           name: 'Documentos',

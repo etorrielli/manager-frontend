@@ -9,7 +9,7 @@
       <div v-if="items != null">
         <b-table :small="true" responsive striped hover :items="items" :fields="fields">
           <template slot="actions" slot-scope="row">
-            <b-button size="sm" @click="editPersona(row.item, row.index)" class="mr-2" variant="blue"><v-icon name="edit"/></b-button>
+            <b-button size="sm" class="mr-2" variant="blue" @click="editPersona(row.item)"><v-icon name="edit"/></b-button>
             <b-button size="sm" @click="deletePersona(row.item, row.index)" class="mr-2"><v-icon name="trash-alt"/></b-button>
           </template>
         </b-table>
@@ -50,7 +50,7 @@ export default {
           label: "Tipo Documento",
           sortable: false
         },
-        perFechaNacimiento: {
+				fechaNacimientoFormat: {
           label: "Fecha Nacimiento",
           sortable: false
         },
@@ -69,7 +69,16 @@ export default {
           element.perTipoDocumento = element.perTipoDocumento.tpoDescripcion;
         });
       });
-    }
+    },
+    editPersona(item){
+    	this.$router.push({path: 'editar-persona/' + item.perId});
+    },
+		deletePersona(item, index){
+			axios.delete("http://localhost:8080/personas/" + item.perId).then(respuesta => {
+				console.log(`respuesta.data.message: ` + respuesta.data.message);
+        this.getPersonas();
+			});
+		}
   }
 };
 </script>
